@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ShowItemsCart({ data }) {
+function ShowItemsCart({ data, dispatch }) {
 	return (
 		<div className="card bg-primary-subtle mt-4">
 			<div className="card-body">
@@ -14,6 +14,26 @@ function ShowItemsCart({ data }) {
 					<div>$129.00</div>
 					<p>this </p>
 				</div>
+				<button
+					onClick={(e) =>
+						dispatch({
+							type: 'DELETE',
+							payload: data.id,
+						})
+					}
+				>
+					del
+				</button>
+				{/* <button
+					onClick={(e) =>
+						dispatch({
+							type: 'EDIT',
+							payload: data.id,
+						})
+					}
+				>
+					edit
+				</button> */}
 			</div>
 		</div>
 	);

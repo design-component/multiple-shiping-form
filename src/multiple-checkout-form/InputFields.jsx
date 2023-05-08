@@ -13,6 +13,7 @@ function InputFields({ state, dispatch }) {
 							dispatch({
 								type: 'TEXT',
 								payload: {
+									id: state.selected[state.selected.length - 1]?.id || 1,
 									name: e.target.name,
 									value: e.target.value,
 								},
@@ -23,6 +24,11 @@ function InputFields({ state, dispatch }) {
 						id="firstName"
 						placeholder="Enter Name Here"
 						name="name"
+						defaultValue={
+							state.selected[state.selected.length - 1]?.name === null
+								? ' '
+								: ' '
+						}
 						required
 					/>
 					<div className="invalid-feedback">Valid first name is required.</div>
@@ -34,6 +40,7 @@ function InputFields({ state, dispatch }) {
 							dispatch({
 								type: 'TEXT',
 								payload: {
+									id: state.selected[state.selected.length - 1]?.id || 1,
 									name: e.target.name,
 									value: e.target.value,
 								},
@@ -44,6 +51,11 @@ function InputFields({ state, dispatch }) {
 						id="phone"
 						placeholder="017********"
 						name="phone"
+						defaultValue={
+							state.selected[state.selected.length - 1]?.phone === null
+								? ''
+								: ''
+						}
 						required
 					/>
 					<div className="invalid-feedback">
@@ -59,6 +71,7 @@ function InputFields({ state, dispatch }) {
 							dispatch({
 								type: 'TEXT',
 								payload: {
+									id: state.selected[state.selected.length - 1]?.id || 1,
 									name: e.target.name,
 									value: e.target.value,
 								},
@@ -69,6 +82,11 @@ function InputFields({ state, dispatch }) {
 						id="email"
 						placeholder="you@example.com"
 						name="email"
+						defaultValue={
+							state.selected[state.selected.length - 1]?.email === null
+								? ''
+								: ''
+						}
 					/>
 					<div className="invalid-feedback">
 						Please enter a valid email address for shipping updates.
@@ -81,6 +99,7 @@ function InputFields({ state, dispatch }) {
 							dispatch({
 								type: 'TEXT',
 								payload: {
+									id: state.selected[state.selected.length - 1]?.id || 1,
 									name: e.target.name,
 									value: e.target.value,
 								},
@@ -92,6 +111,9 @@ function InputFields({ state, dispatch }) {
 						placeholder="Dhaka"
 						required
 						name="city"
+						defaultValue={
+							state.selected[state.selected.length - 1]?.city === null ? '' : ''
+						}
 					/>
 					<div className="invalid-feedback">
 						Please enter your shipping address.
@@ -106,6 +128,7 @@ function InputFields({ state, dispatch }) {
 						dispatch({
 							type: 'TEXT',
 							payload: {
+								id: state.selected[state.selected.length - 1]?.id || 1,
 								name: e.target.name,
 								value: e.target.value,
 							},
@@ -116,6 +139,11 @@ function InputFields({ state, dispatch }) {
 					id="address"
 					placeholder="1234 Main St"
 					name="address"
+					defaultValue={
+						state.selected[state.selected.length - 1]?.address === null
+							? ''
+							: ''
+					}
 					required
 				></textarea>
 
@@ -123,77 +151,70 @@ function InputFields({ state, dispatch }) {
 					Please enter your shipping address.
 				</div>
 			</div>
-			<div className="row">
-				<div className="col-md-4">
-					<label className="form-label"> Color</label>
-
-					<select
-						onChange={(e) =>
-							dispatch({
-								type: 'TEXT',
-								payload: {
-									name: e.target.name,
-									value: e.target.value,
-								},
-							})
-						}
-						name="color"
-						className="form-control here set-slug"
-						aria-label=".form-select-sm example"
-					>
-						<option>---</option>
-						<option>---</option>
-						<option>---</option>
-					</select>
-				</div>
-				<div className="col-md-4">
-					<label className="form-label"> Size</label>
-
-					<select
-						onChange={(e) =>
-							dispatch({
-								type: 'TEXT',
-								payload: {
-									name: e.target.name,
-									value: e.target.value,
-								},
-							})
-						}
-						name="color"
-						className="form-control here set-slug"
-						aria-label=".form-select-sm example"
-					>
-						<option>---</option>
-						<option>---</option>
-						<option>---</option>
-					</select>
-				</div>
-				<div className=" col-md-4">
-					<label className="form-label" htmlFor="qty">
-						Quantity
-					</label>
-					<input
-						onChange={(e) =>
-							dispatch({
-								type: 'TEXT',
-								payload: {
-									name: e.target.name,
-									value: e.target.value,
-								},
-							})
-						}
-						type="number"
-						className="form-control"
-						id="qty"
-						placeholder="01"
-						required
-						name="qty"
-					/>
-					<div className="invalid-feedback">
-						Please enter your shipping address.
+			{state?.apiData?.cart_details?.map((x, i) => (
+				<div className="row" key={i}>
+					<h6>Variant {i + 1}</h6>
+					<div className="col-md-4">
+						<label htmlFor="color">Color</label>
+						<input
+							type="text"
+							className="form-control"
+							id="color"
+							placeholder="Dhaka"
+							required
+							name="color"
+							defaultValue={x.color}
+							readOnly
+						/>
+					</div>
+					<div className="col-md-4">
+						<label htmlFor="color">Size</label>
+						<input
+							type="text"
+							className="form-control"
+							id="size"
+							placeholder="Dhaka"
+							required
+							name="size"
+							defaultValue={x.size}
+							readOnly
+						/>
+					</div>
+					<div className=" col-md-4">
+						<label className="form-label" htmlFor="qty">
+							Quantity
+						</label>
+						<input
+							onChange={(e) =>
+								dispatch({
+									type: 'TEXT',
+									payload: {
+										id: state.selected[state.selected.length - 1]?.id || 1,
+										name: e.target.name,
+										value: e.target.value,
+										size: x.size,
+										color: x.color,
+									},
+								})
+							}
+							type="number"
+							className="form-control"
+							id="qty"
+							placeholder="00"
+							required
+							name="qty"
+							defaultValue={
+								state.selected[state.selected.length - 1]?.qty === null
+									? ''
+									: ''
+							}
+						/>
+						<div className="invalid-feedback">
+							Please enter your shipping address.
+						</div>
 					</div>
 				</div>
-			</div>
+			))}
 			<div className="text-end">
 				<button
 					onClick={(e) =>
@@ -208,9 +229,9 @@ function InputFields({ state, dispatch }) {
 				</button>
 			</div>
 			<div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-				{state.selected.map((e, i) => (
-					<ShowItemsCart data={e} key={i} />
-				))}
+				{state.selected
+					.map((e, i) => <ShowItemsCart dispatch={dispatch} data={e} key={i} />)
+					.reverse()}
 			</div>
 
 			<hr className="mb-4" />
