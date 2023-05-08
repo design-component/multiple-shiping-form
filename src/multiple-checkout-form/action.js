@@ -11,19 +11,7 @@ export const initialState = {
 		size: null,
 		qty: 0,
 	},
-	selected: [
-		{
-			id: 1,
-			name: null,
-			phone: null,
-			email: null,
-			city: null,
-			address: null,
-			color: null,
-			size: null,
-			qty: 0,
-		},
-	],
+	selected: [],
 	apiData: [],
 };
 // all logic
@@ -37,6 +25,13 @@ export const reducer = (state = initialState, action) => {
 					...state.InitialItems,
 					[action.payload.name]: action.payload.value,
 				},
+				selected: state.selected.map((e) => {
+					if (state.InitialItems.id === 1) {
+						return { name: 'old' };
+					} else {
+						return { name: 'new' };
+					}
+				}),
 			};
 
 		// delete fields

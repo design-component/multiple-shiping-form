@@ -1,11 +1,11 @@
 import React from 'react';
 
-function ShowItemsCart() {
+function ShowItemsCart({ data }) {
 	return (
 		<div className="card bg-primary-subtle mt-4">
 			<div className="card-body">
 				<div className="text-section">
-					<h5 className="card-title fw-bold">Card title</h5>
+					<h5 className="card-title fw-bold">{data?.name}</h5>
 					<p className="card-text">
 						Some quick example text to build on the card's content.
 					</p>

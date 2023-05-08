@@ -208,8 +208,8 @@ function InputFields({ state, dispatch }) {
 				</button>
 			</div>
 			<div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-				{state.selected.map((e) => (
-					<ShowItemsCart />
+				{state.selected.map((e, i) => (
+					<ShowItemsCart data={e} key={i} />
 				))}
 			</div>
 
