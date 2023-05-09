@@ -10,6 +10,7 @@ export const initialState = {
 		color: null,
 		size: null,
 		qty: 0,
+		variants: [{ id: 1, color: null, size: null, qty: 0 }],
 	},
 	selected: [],
 	apiData: {},
@@ -21,16 +22,18 @@ export const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				InitialItems: {
-					...state.InitialItems,
-					id: state.selected[state.selected.length - 1]?.id + 1 || 1,
+					id: 1,
+					name: null,
+					phone: null,
+					email: null,
+					city: null,
+					address: null,
+					color: null,
+					size: null,
+					qty: 0,
+					variants: [{ id: 1, color: null, size: null, qty: 0 }],
 				},
-				selected: [
-					...state.selected,
-					{
-						...state.InitialItems,
-						id: state.selected[state.selected.length - 1]?.id + 1 || 1,
-					},
-				],
+				selected: [...state.selected, action.payload],
 			};
 		// change text
 		case 'TEXT':
@@ -40,18 +43,68 @@ export const reducer = (state = initialState, action) => {
 					...state.InitialItems,
 					[action.payload.name]: action.payload.value,
 				},
-				selected: state.selected.map((e) =>
-					e.id === action.payload.id
-						? {
-								...e,
-								size: action.payload.size,
-								color: action.payload.color,
-								[action.payload.name]: action.payload.value,
-						  }
-						: { ...e }
-				),
+				// selected: state.selected.map((e) =>
+				// 	e.id === action.payload.id
+				// 		? {
+				// 				...e,
+				// 				size: action.payload.size,
+				// 				color: action.payload.color,
+				// 				[action.payload.name]: action.payload.value,
+				// 		  }
+				// 		: { ...e }
+				// ),
 			};
 
+		// e.id === action.payload.id
+		// 				? {
+		// 						id: action.payload.id,
+		// 						name: action.payload.name,
+		// 						qty: action.payload.value,
+		// 						size: action.payload.size,
+		// 						color: action.payload.color,
+		// 				  }
+		// 				: { ...e }
+
+		// variant Data
+		case 'VARIANT':
+			return {
+				...state,
+				InitialItems: {
+					...state.InitialItems,
+					variants: state.InitialItems.variants.map((e) => {
+						if (e.id === action.payload.id) {
+							return {
+								id: action.payload.id,
+								name: action.payload.name,
+								qty: action.payload.value,
+								size: action.payload.size,
+								color: action.payload.color,
+							};
+						} else if (e.id !== action.payload.id) {
+							return state.InitialItems.variants.push({
+								id: action.payload.id,
+								name: action.payload.name,
+								qty: action.payload.value,
+								size: action.payload.size,
+								color: action.payload.color,
+							});
+						} else {
+							return e;
+						}
+					}),
+
+					// variants: [
+					// 	...state.InitialItems.variants,
+					// 	{
+					// 		id: action.payload.id,
+					// 		name: action.payload.name,
+					// 		value: action.payload.value,
+					// 		size: action.payload.size,
+					// 		color: action.payload.color,
+					// 	},
+					// ],
+				},
+			};
 		// Api Data
 		case 'API_DATA':
 			return {
