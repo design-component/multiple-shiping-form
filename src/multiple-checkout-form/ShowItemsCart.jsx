@@ -1,6 +1,7 @@
 import React from 'react';
 
 function ShowItemsCart({ data, dispatch }) {
+	console.log(data);
 	return (
 		<div className="card bg-primary-subtle mt-4">
 			<div className="card-body">
@@ -14,6 +15,9 @@ function ShowItemsCart({ data, dispatch }) {
 					<div>$129.00</div>
 					<p>this </p>
 				</div>
+				{data?.variants?.map((e) => (
+					<li>adsf</li>
+				))}
 				<button
 					onClick={(e) =>
 						dispatch({

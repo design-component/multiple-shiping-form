@@ -36,7 +36,7 @@ function InputFields({ state, dispatch }) {
 							className="form-control"
 							id="firstName"
 							placeholder="Enter Name Here"
-							autoComplete="true"
+							autoComplete="off"
 							name="name"
 							defaultValue={
 								state.selected[state.selected.length - 1]?.name === null
@@ -66,7 +66,7 @@ function InputFields({ state, dispatch }) {
 							className="form-control"
 							id="phone"
 							placeholder="017********"
-							autoComplete="true"
+							autoComplete="false"
 							name="phone"
 							defaultValue={
 								state.selected[state.selected.length - 1]?.phone === null
@@ -98,7 +98,7 @@ function InputFields({ state, dispatch }) {
 							className="form-control"
 							id="email"
 							placeholder="you@example.com"
-							autoComplete="true"
+							autoComplete="false"
 							name="email"
 							defaultValue={
 								state.selected[state.selected.length - 1]?.email === null
@@ -127,7 +127,7 @@ function InputFields({ state, dispatch }) {
 							className="form-control"
 							id="city"
 							placeholder="Dhaka"
-							autoComplete="true"
+							autoComplete="false"
 							required
 							name="city"
 							defaultValue={
@@ -159,7 +159,7 @@ function InputFields({ state, dispatch }) {
 						className="form-control"
 						id="address"
 						placeholder="1234 Main St"
-						autoComplete="true"
+						autoComplete="false"
 						name="address"
 						defaultValue={
 							state.selected[state.selected.length - 1]?.address === null
@@ -183,7 +183,7 @@ function InputFields({ state, dispatch }) {
 								className="form-control"
 								id="color"
 								placeholder="Dhaka"
-								autoComplete="true"
+								autoComplete="false"
 								required
 								name="color"
 								defaultValue={x.color}
@@ -197,7 +197,7 @@ function InputFields({ state, dispatch }) {
 								className="form-control"
 								id="size"
 								placeholder="Dhaka"
-								autoComplete="true"
+								autoComplete="false"
 								required
 								name="size"
 								defaultValue={x.size}
@@ -225,7 +225,7 @@ function InputFields({ state, dispatch }) {
 								className="form-control"
 								id="qty"
 								placeholder="00"
-								autoComplete="true"
+								autoComplete="false"
 								required
 								name="qty"
 							/>
