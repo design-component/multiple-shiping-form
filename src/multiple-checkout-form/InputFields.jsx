@@ -225,8 +225,7 @@ function InputFields({ state, dispatch }) {
 								className="form-control"
 								id="qty"
 								placeholder="00"
-								autoComplete="false"
-								required
+								autoComplete="off"
 								name="qty"
 							/>
 							<div className="invalid-feedback">
